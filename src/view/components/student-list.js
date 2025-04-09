@@ -49,7 +49,7 @@ function render() {
     const name = studentElement.querySelector('h1');
     const studentnr = studentElement.querySelector('.studentnr');
     const photo = studentElement.querySelector('.studentimg');
-    const Email = studentElement.querySelector('.student-email')
+    const Email = studentElement.querySelector('.student-email');
 
     name.textContent = student.name;
     studentnr.textContent = student.studentnr;
@@ -68,3 +68,34 @@ function render() {
 
 render();
 getStudents();
+
+function findDuplicates() {
+  const studentMap = new Map();
+  const duplicates = [];
+
+  students.forEach(student => {
+    if (studentMap.has(student.studentnr)) {
+      duplicates.push(student);
+    } else {
+      studentMap.set(student.studentnr, student);
+    }
+  });
+
+  if (duplicates.length === 0) {
+    alert("Geen dubbele studentnummers gevonden.");
+    return;
+  }
+
+  const userChoice = confirm(
+    `Er zijn ${duplicates.length} dubbele student(en). Wil je: \n\n - OK: Duplicaten verwijderen (behalve de eerste)\n - Cancel: De eerste dubbele student bewerken?`
+  );
+
+  if (userChoice) {
+    duplicates.forEach(student => deleteStudentEvent(student, new Event('click')));
+  } else {
+    const firstDuplicate = duplicates[0];
+    editStudentEvent(firstDuplicate, new Event('click'));
+  }
+}
+
+document.querySelector('#find-duplicates').addEventListener('click', findDuplicates);
