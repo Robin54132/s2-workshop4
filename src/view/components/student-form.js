@@ -65,6 +65,7 @@ function render(student = {}) {
   formElement.studentnr.value = student.studentnr || '';
   formElement.photo.value = student.photo || '';
   formElement.id.value = student.id || '';
+  formElement.email.value = student.email || '';
   formElement.querySelector(`[name=gender][value=${student?.gender || 'other'}]`).checked = true;
 
   if (!student.id) {

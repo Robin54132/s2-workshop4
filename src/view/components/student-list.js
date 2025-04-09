@@ -49,11 +49,13 @@ function render() {
     const name = studentElement.querySelector('h1');
     const studentnr = studentElement.querySelector('.studentnr');
     const photo = studentElement.querySelector('.studentimg');
+    const Email = studentElement.querySelector('.student-email')
 
     name.textContent = student.name;
     studentnr.textContent = student.studentnr;
     photo.src = `${student.photo}`;
     photo.alt = student.name;
+    Email.textContent = student.email;
 
     studentElement.querySelector('.delete').addEventListener('click', (event) => deleteStudentEvent(student, event));
     studentElement.querySelector('li').addEventListener('click', (event) => editStudentEvent(student, event));
